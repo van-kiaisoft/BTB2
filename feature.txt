@@ -1,1 +1,152 @@
-Sua file
+Bài Thực Hành Git
+Mục tiêu:
+
+- Hiểu và thực hiện các thao tác cơ bản với Git.
+- Quản lý phiên bản mã nguồn bằng cách sử dụng branch và commit.
+- Học cách xử lý xung đột (conflict) và thực hiện pull request.
+Yêu cầu:
+
+- Máy tính đã cài đặt Git.
+- Tài khoản GitHub hoặc GitLab (hoặc sử dụng máy chủ Git nội bộ).
+- Config git trước khi bắt đầu:
+git config --global user.name "Your Name"
+git config --global user.email  "name@domain.example"
+
+Các bước thực hiện:
+Bước 1: Khởi tạo một repository
+
+1. Mở Terminal (Command Prompt)
+2. Tạo một thư mục mới cho dự án:
+
+   mkdir MyGitProject
+   cd MyGitProject
+
+3. Khởi tạo một Git repository:
+   git init
+   - Sau lệnh này, thư mục của bạn sẽ trở thành một repository Git, nơi mà tất cả các thay đổi sẽ được theo dõi.
+
+Bước 2: Thêm và commit các tập tin
+
+1. Tạo một tập tin README.md trong thư mục:
+   ```bash
+   echo "# My Git Project" > README.md
+   ```
+2. Thêm tập tin vào staging area:
+   ```bash
+   git add README.md
+git status
+   ```
+3. Commit tập tin vào repository:
+   ```bash
+   git commit -m "Thêm README.md"
+   ```
+   - Bạn đã tạo một commit đầu tiên, lưu lại thay đổi này trong lịch sử của Git.
+
+Bước 3: Tạo một nhánh (branch)
+
+1. Tạo một nhánh mới có tên là `feature`:
+   ```bash
+   git branch feature
+   ```
+2. Chuyển sang nhánh `feature`:
+   ```bash
+   git checkout feature
+   ```
+3. Xác nhận rằng bạn đang ở trên nhánh `feature` bằng cách kiểm tra trạng thái:
+   ```bash
+   git status
+   ```
+
+Bước 4: Thêm một tính năng mới trên nhánh `feature`
+
+1. Tạo một tập tin mới `feature.txt`:
+   ```bash
+   echo "This is a new feature" > feature.txt
+   ```
+2. Thêm và commit thay đổi:
+   ```bash
+   git add feature.txt
+  git commit -m "Thêm tập tin feature.txt"
+   ```
+
+Bước 5: Merge nhánh `feature` vào nhánh `main`
+
+1. Chuyển lại về nhánh `main`:
+   ```bash
+   git checkout main
+   ```
+2. Merge nhánh `feature` vào nhánh `main`:
+   ```bash
+   git merge feature
+   ```
+   - Nếu không có xung đột, thay đổi từ nhánh `feature` sẽ được hợp nhất vào `main`.
+
+Bước 6: Xử lý xung đột
+
+1. Tạo xung đột:
+   - Trên nhánh `main`, mở tập tin `feature.txt` và thay đổi nội dung:
+     ```bash
+       echo "This is a conflicting change on main" > feature.txt
+     git add feature.txt
+     git commit -m "Thay đổi feature.txt trên main"
+     ```
+   - Trở lại nhánh `feature` và thay đổi tập tin `feature.txt`:
+     ```bash
+            git checkout feature
+     echo "This is another conflicting change on feature" > feature.txt
+     git add feature.txt
+     git commit -m "Thay đổi feature.txt trên feature"
+     ```
+2. Merge nhánh `feature` vào `main`:
+   ```bash
+        git checkout main
+   git merge feature
+   ```
+   - Bạn sẽ gặp xung đột. Git sẽ báo cho bạn về xung đột trong tập tin `feature.txt`.
+
+3. Giải quyết xung đột:
+   - Mở tập tin `feature.txt` và thấy rằng Git đã đánh dấu phần có xung đột. Chỉnh sửa lại tập tin để giữ lại nội dung phù hợp.
+   - Thêm tập tin đã chỉnh sửa vào staging area và commit lại:
+     ```bash
+       git add feature.txt
+     git commit -m "Giải quyết xung đột trong feature.txt"
+     ```
+
+Bước 7: Đẩy thay đổi lên GitHub/GitLab
+
+1. Kết nối repository với GitHub/GitLab:
+   ```bash
+   git remote add origin https://github.com/user/MyGitProject.git
+   ```
+2. Đẩy nhánh `main` lên GitHub/GitLab:
+   ```bash
+   git push -u origin main
+   ```
+
+Bước 8: Tạo Pull Request (PR)
+
+1. Trên GitHub/GitLab:
+   - Truy cập repository của bạn trên GitHub/GitLab.
+   - Tạo Pull Request từ nhánh `feature` vào nhánh `main`.
+   - Yêu cầu đánh giá (code review) từ đồng đội hoặc tự đánh giá.
+
+2. Merge PR:
+   - Sau khi PR được phê duyệt, merge PR vào nhánh `main`.
+
+Bước 9: Xem lịch sử commit
+
+1. Xem lại toàn bộ lịch sử commit:
+   ```bash
+   git log
+   ```
+2. Xem lịch sử dưới dạng đồ thị:
+   ```bash
+   git log --graph --oneline
+   ```
+
+Bước 10: Tự đánh giá và kết luận
+
+- Đánh giá lại quá trình thực hành: Xem xét các bước đã thực hiện, hiểu rõ cách Git quản lý phiên bản và xử lý xung đột.
+- Tiếp tục luyện tập: Thực hành thêm với các tính năng phức tạp hơn như rebase, stash, và các workflow nâng cao.
+
+
